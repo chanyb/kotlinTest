@@ -6,12 +6,14 @@
  * 인터페이스
  * 3) 인터페이스
  * 
- * 4) 상속
+ * 4) 인터페이스 구현
  * 5) 위임(Delegation)
+ * 
+ * 6) 상속
  */
 
 // 1) 생성자
-public class People {
+open public class People {
     var age: Int;
     var name: String;
 
@@ -40,7 +42,7 @@ interface BaseInterfase {
     fun koreanAge(): Int;
 }
 
-// 4) 상속
+// 4) 인터페이스 구현
 public class People3: BaseInterfase {
     var age: Int;
     var name: String;
@@ -66,3 +68,7 @@ public class Student(p: BaseInterfase): BaseInterfase by p {}
     var student = Student(someOne);
     println(student.koreanAge());
 */
+
+// 6) 상속
+class Teacher(name: String, age: Int): People(name, age) {}
+// 상속 받고자하는 People이 open으로 설정이 되어있어야 한다.(kotlin은 default로 final class이므로 open 키워드를 통해 final이 아님을 선언해준다.)
