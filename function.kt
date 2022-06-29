@@ -4,6 +4,7 @@
  * 2) 디폴트 인자
  * 3) 확장함수
  * 4) 고차함수
+ * 5) 람다함수
  */
 
 
@@ -53,3 +54,15 @@ fun calledFunction(value: String): Unit {
     println("calledFunction: " + value);
 }
 
+// 5) 람다함수
+val lambda1: (String) -> Unit = { _str ->
+    println(_str);
+    println("끝");
+}
+
+val lambda2: (String) -> String = { _str ->
+    println(_str);
+    println("끝");
+    "this";
+    //람다함수가 여러줄 인 경우, 마지막 줄의 결과값이 반환된다.
+}
