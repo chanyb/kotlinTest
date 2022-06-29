@@ -3,6 +3,7 @@
  * 1) 오버로딩, 오버라이딩 가능
  * 2) 디폴트 인자
  * 3) 확장함수
+ * 4) 고차함수
  */
 
 
@@ -40,4 +41,13 @@ fun defaultParameter_end(arg1: Int, arg2: Int=142): Unit {
 fun People.nextYear(): Int {
     // People class에 없던 nextYear 멤버 함수를 추가했음.
     return this.age+1;
+}
+
+// 4) 고차함수: 다른 함수를 인자로 받거나 함수를 반환하는 함수
+fun higherOrderFunction(predictedInt: Int): Boolean {
+    return isOdd(predictedInt);
+}
+
+fun isOdd(x: Int): Boolean {
+    return x%2 != 0;
 }
