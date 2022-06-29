@@ -44,10 +44,12 @@ fun People.nextYear(): Int {
 }
 
 // 4) 고차함수: 다른 함수를 인자로 받거나 함수를 반환하는 함수
-fun higherOrderFunction(predictedInt: Int): Boolean {
-    return isOdd(predictedInt);
+// 고차함수에 넘기려면 ::funcName 형식으로 넘겨줘야함.. -> higherOrderFunction(::calledFunction);
+fun higherOrderFunction(func: (String) -> Unit): Unit {
+    func("Call in higherOrder Function");
 }
 
-fun isOdd(x: Int): Boolean {
-    return x%2 != 0;
+fun calledFunction(value: String): Unit {
+    println("calledFunction: " + value);
 }
+
