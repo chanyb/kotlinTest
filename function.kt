@@ -5,6 +5,12 @@
  * 3) 확장함수
  * 4) 고차함수
  * 5) 람다함수
+ * 6) 스코프함수
+ * 6-1) apply
+ * 6-2) run
+ * 6-3) with
+ * 6-4) also
+ * 6-5) let
  */
 
 
@@ -66,3 +72,39 @@ val lambda2: (String) -> String = { _str ->
     "this";
     //람다함수가 여러줄 인 경우, 마지막 줄의 결과값이 반환된다.
 }
+
+// 6) 스코프함수
+class Book(var name: String, var price: Int) {}
+
+// 6-1) apply: 변수에 담기 전에 초기화 과정을 수행할 때
+fun disCountBookWithApply(book: Book) {
+
+    book.apply {
+        name = "[초특가]"+name;
+    }
+    println(book.name);
+
+}
+
+// 6-2 run: apply와 같지만, 맨 마지막줄을 return한다.
+fun disCountBookWithRun(book: Book) {
+
+    var returnValue = book.run {
+        name = "[초특가]"+name;
+        "this";
+    }
+    println(returnValue);
+}
+
+// 6-3 with: run과 같고, 인스턴스를 참조연산자 대신 파라미터로받는다.
+fun disCountBookWithWith(book: Book) {
+    var returnValue = with (book) {
+        name = "[초특가]" + name;
+        "this2";
+    }
+
+    println(returnValue);
+}
+
+// 6-4 also: 처리가 끝나면 인스턴스를반환(as apply) but 참조연산자 it을 사용 해야함. (apply가 같은 이름의 변수가 스코프 밖에 있는경우에, 스코프 밖을 먼저 참조하기 떄문에..)
+// 6-5 let: 처리가 끝나면 최종 라인을 반환(as run) but 참조연산자 it을 사용 해야함. (run이 같은 이름의 변수가 스코프 밖에 있는경우에, 스코프 밖을 먼저 참조하기 떄문에..)
