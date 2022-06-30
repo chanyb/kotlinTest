@@ -8,6 +8,7 @@
  * 6) 상속
  * 7) object 클래스
  * 7-1) companion object
+ * 8) innerclass & outerclass
  */
 
 // 1) 생성자
@@ -103,5 +104,28 @@ public class People4 {
 
     fun koreanAge(): Int {
         return this.age-2;
+    }
+}
+
+// 8) innerClass & outerClass
+class OuterClass {
+    var text = "OuterClass";
+
+    class NestedClass {
+        fun hello() {
+            println("NestedClass");
+        }
+    }
+
+    inner class InnerClass {
+        var text= "InnerClass";
+
+        fun hello() {
+            println(text)
+        }
+
+        fun helloOuter() {
+            println(this@OuterClass.text);
+        }
     }
 }
