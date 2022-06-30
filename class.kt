@@ -2,14 +2,12 @@
  * 클래스
  * 1) 생성자
  * 2) 멤버 프로퍼티 선언
- * 
- * 인터페이스
  * 3) 인터페이스
- * 
  * 4) 인터페이스 구현
  * 5) 위임(Delegation)
- * 
  * 6) 상속
+ * 7) object 클래스
+ * 7-1) companion object
  */
 
 // 1) 생성자
@@ -72,3 +70,38 @@ public class Student(p: BaseInterfase): BaseInterfase by p {}
 // 6) 상속
 class Teacher(name: String, age: Int): People(name, age) {}
 // 상속 받고자하는 People이 open으로 설정이 되어있어야 한다.(kotlin은 default로 final class이므로 open 키워드를 통해 final이 아님을 선언해준다.)
+
+// 7) Object 클래스: singleton패턴을 언어자체에서 지원한다.
+object counterManager {
+    // 그 자체로 객체이기 때문에, 생성자를 사용하지 않는다.
+    var count=0;
+    
+    fun countUp() {
+        count++;
+    }
+
+    fun clear() {
+        count = 0;
+    }
+}
+
+// 7-1) companion object: 기존 클래스 안에도 object를 만들 수 있다. (기존 언어들의 static과 비슷함.)
+public class People4 {
+    companion object {
+        var peopleCount = 0;
+    }
+    var age: Int;
+    var name: String;
+
+    constructor(name: String="", age: Int=0) {
+        // 생성자의 default값을 이용하면 생성자를 오버로딩 하지 않아도 된다.
+        // 멤버프로퍼티에 대해 자동으로 getter, setter가 생긴다.
+        // ex) people.name = "bcyu" 가능.
+        this.name = name;
+        this.age = age;
+    }
+
+    fun koreanAge(): Int {
+        return this.age-2;
+    }
+}
