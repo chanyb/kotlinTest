@@ -8,7 +8,9 @@
  * 6) 상속
  * 7) object 클래스
  * 7-1) companion object
- * 8) innerclass & outerclass
+ * 8) 내부 & 외부 클래스
+ * 9) 데이터클래스
+ * 10) 열거형 클래스
  */
 
 // 1) 생성자
@@ -127,5 +129,47 @@ class OuterClass {
         fun helloOuter() {
             println(this@OuterClass.text);
         }
+    }
+}
+
+// 9) 데이터클래스
+data class DataOfPeople(var name: String, var age:Int);
+
+fun dataClassTest() {
+    var a = People("이름", 30);
+
+    // 같은 값을 가지는 객체여도 동일한 객체는 아님
+    println(a == People("이름", 30));
+
+    // 객체의 hashcode와 그냥 객체를 출력한 것은 차이가 있음.
+    println(a.hashCode());
+    println(a);
+    // println(a.copy()); // 기본 클래스에서의 copy함수는 없음. compile error
+    // println(a.copy("아린", 30)); // 기본 클래스에서의 copy함수는 없음. compile error
+    // println(a.copy(age=28)); // 기본 클래스에서의 copy함수는 없음. compile error
+
+    println("\n\n");
+
+
+    var b = DataOfPeople("병찬", 30);
+
+    // 데이터클래스의 객체는 값이 같으면 동일한 객체로 판단함
+    println(b == DataOfPeople("병찬", 30));
+    println(b.hashCode());
+    println(b);
+
+    println(b.copy());
+    println(b.copy("아린", 30));
+    println(b.copy(age=28));
+}
+
+// 10) 열거형 클래스
+enum class Color(val rgb:String) {
+    RED("#FF0000"),
+    BLUE("#0000FF"),
+    GREEN("#00FF00"); // enum을 모두 열거한 뒤 마지막에 세미콜론을 찍으면, 그 다음부터 함수를 선언할 수 있다.
+
+    fun isRed(): Boolean {
+        return this==Color.RED;
     }
 }
